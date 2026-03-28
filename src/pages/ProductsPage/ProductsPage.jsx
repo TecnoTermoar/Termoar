@@ -1,39 +1,33 @@
 const products = [
   {
     title: 'Sensores RTD / PT100',
-    description:
-      'Configuraciones para uso industrial con distintas longitudes, elementos y conexiones. Opciones para alta estabilidad y repetibilidad.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Termopares (Tipo K, J, T, etc.)',
-    description:
-      'Soluciones para altas temperaturas y ambientes exigentes. Armados especiales según proceso y normativa aplicable.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Vainas termométricas',
-    description:
-      'Protección mecánica y química del elemento sensor. Materiales y conexiones según presión, vibración y corrosión.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Transmisores y cabezales',
-    description:
-      'Integración con sistemas de control (4–20 mA, HART u otras opciones según necesidad). Montaje en cabezal o riel.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Cables y accesorios',
-    description:
-      'Extensiones, conectores, prensaestopas, pasamuros y componentes para instalaciones seguras y trazables.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Conjuntos especiales',
-    description:
-      'Diseños a medida para plantas, laboratorios y OEM. Identificación y documentación para mantenimiento y auditoría.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
 ]
 
 function ProductCard({ title, description }) {
   return (
-    <article className="card product-card">
+    <article className="card product-card reveal reveal-up">
       <div className="media" aria-hidden="true"></div>
       <div className="card-body">
         <h3>{title}</h3>
@@ -49,10 +43,7 @@ export default function ProductsPage() {
       <div className="container">
         <div className="page-head">
           <h1>Productos</h1>
-          <p className="muted">
-            Portfolio orientado a procesos industriales. Las configuraciones finales dependen del punto de medición y
-            requerimientos de instalación.
-          </p>
+          <p className="muted reveal">Lorem ipsum dolor sit amet.</p>
         </div>
 
         <div className="cards three">
@@ -61,11 +52,8 @@ export default function ProductsPage() {
           ))}
         </div>
 
-        <div className="notice">
-          <p className="muted">
-            ¿Necesitás una especificación? Enviá rango de temperatura, tipo de proceso, presión, conexión y longitud
-            requerida.
-          </p>
+        <div className="notice reveal">
+          <p className="muted">Lorem ipsum dolor sit amet.</p>
         </div>
       </div>
     </section>

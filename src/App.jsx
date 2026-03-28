@@ -6,8 +6,11 @@ import ProductsPage from './pages/ProductsPage/ProductsPage.jsx'
 import ServicesPage from './pages/ServicesPage/ServicesPage.jsx'
 import AboutPage from './pages/AboutPage/AboutPage.jsx'
 import ContactPage from './pages/ContactPage/ContactPage.jsx'
+import useRevealOnScroll from './hooks/useRevealOnScroll.js'
 
 function App() {
+  useRevealOnScroll()
+
   return (
     <Routes>
       <Route element={<SiteLayout />}>

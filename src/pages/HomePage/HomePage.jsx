@@ -5,36 +5,36 @@ export default function HomePage() {
     <>
       <section className="hero-section">
         <div className="container hero-grid">
-          <div>
+          <div className="reveal reveal-right">
             <p className="eyebrow">TERMOMETRÍA • INDUSTRIA • CALIDAD</p>
             <h1>Termometría Argentina</h1>
             <p className="lead">
-              Desarrollo y provisión de soluciones de medición de temperatura para procesos críticos,
-              con foco en trazabilidad, confiabilidad y cumplimiento normativo.
+              Fundada en 1979. Especialistas en medición de temperatura y análisis de gases
+              para la industria.
             </p>
             <div className="cta-row">
               <NavLink className="btn primary" to="/productos">
                 Ver productos
               </NavLink>
-              <NavLink className="btn" to="/servicios">
+              <NavLink className="btn primary" to="/servicios">
                 Ver servicios
               </NavLink>
             </div>
           </div>
 
-          <div className="hero-card" aria-label="Resumen">
+          <div className="hero-card reveal reveal-left" aria-label="Resumen">
             <div className="stats">
               <div className="stat">
                 <p className="stat-kpi">Calidad</p>
-                <p className="muted">Enfoque en documentación y control.</p>
+                <p className="muted">Lorem ipsum dolor sit amet.</p>
               </div>
               <div className="stat">
                 <p className="stat-kpi">Trazabilidad</p>
-                <p className="muted">Registros claros para auditorías.</p>
+                <p className="muted">Lorem ipsum dolor sit amet.</p>
               </div>
               <div className="stat">
                 <p className="stat-kpi">Soporte</p>
-                <p className="muted">Acompañamiento técnico post-venta.</p>
+                <p className="muted">Lorem ipsum dolor sit amet.</p>
               </div>
             </div>
           </div>
@@ -43,30 +43,31 @@ export default function HomePage() {
 
       <section className="section">
         <div className="container">
-          <h2>Qué hacemos</h2>
-          <p className="muted">
-            Diseñamos, fabricamos y proveemos sensores, instrumentos y accesorios para termometría.
-            Integramos soluciones para planta, mantenimiento y laboratorios, priorizando seguridad,
-            repetibilidad y robustez en campo.
+          <h2 className="reveal">¿Qué hacemos?</h2>
+          <p className="muted reveal">
+            Comercializamos instrumentos y servicios para la industria, orientados a resolver
+            requerimientos técnicos en medición de temperatura y análisis de gases.
           </p>
 
           <div className="cards three">
-            <article className="card">
+            <article className="card reveal reveal-up">
               <h3>Instrumentación</h3>
               <p className="muted">
-                Termopares, RTD/PT100, transmisores, vainas termométricas y accesorios.
+                Detectores de gases fijos y portátiles, registradores (data loggers), transmisores
+                de temperatura y gases para instrumentación y control.
               </p>
             </article>
-            <article className="card">
-              <h3>Aplicaciones</h3>
+            <article className="card reveal reveal-up">
+              <h3>Seguridad</h3>
               <p className="muted">
-                Soluciones para industrias alimenticia, química, energía, oil & gas, farmacéutica y más.
+                Sistemas de detección de incendio y gases, y elementos de seguridad para trabajos
+                en la industria.
               </p>
             </article>
-            <article className="card">
-              <h3>Gestión</h3>
+            <article className="card reveal reveal-up">
+              <h3>Laboratorio</h3>
               <p className="muted">
-                Acompañamos desde la ingeniería hasta la puesta en marcha y el mantenimiento.
+                Instrumentos de análisis de laboratorio. Asesoramiento técnico personalizado.
               </p>
             </article>
           </div>
@@ -75,30 +76,30 @@ export default function HomePage() {
 
       <section className="section alt">
         <div className="container">
-          <h2>Onboarding rápido</h2>
+          <h2 className="reveal">¿Cómo lo hacemos?</h2>
           <div className="steps">
-            <div className="step">
+            <div className="step reveal reveal-up">
               <p className="step-n">1</p>
               <p className="step-t">Definimos el punto de medición</p>
-              <p className="muted">Rango, fluido, presión, ambiente, normativa y conexión.</p>
+              <p className="muted">Lorem ipsum dolor sit amet.</p>
             </div>
-            <div className="step">
+            <div className="step reveal reveal-up">
               <p className="step-n">2</p>
               <p className="step-t">Seleccionamos el conjunto</p>
-              <p className="muted">Sensor + vaina + cabezal/transmisor + cableado.</p>
+              <p className="muted">Lorem ipsum dolor sit amet.</p>
             </div>
-            <div className="step">
+            <div className="step reveal reveal-up">
               <p className="step-n">3</p>
               <p className="step-t">Documentación y entrega</p>
-              <p className="muted">Identificación, planos, certificados y soporte.</p>
+              <p className="muted">Lorem ipsum dolor sit amet.</p>
             </div>
           </div>
 
-          <div className="cta-row">
+          <div className="cta-row reveal">
             <NavLink className="btn primary" to="/contacto">
               Solicitar cotización
             </NavLink>
-            <a className="btn" href="https://wa.me/5491144063448" target="_blank" rel="noreferrer">
+            <a className="btn primary" href="https://wa.me/5491144063448" target="_blank" rel="noreferrer">
               <img className="wa-inline-icon" src="/WhatsApp.png" alt="" />
               Consultar por WhatsApp
             </a>

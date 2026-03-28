@@ -5,26 +5,26 @@ export default function AboutPage() {
         <div className="container">
           <div className="page-head">
             <h1>Nosotros</h1>
-            <p className="muted">
-              Somos una empresa argentina especializada en termometría industrial. Nuestro compromiso es entregar
-              soluciones confiables, con documentación clara y orientación a estándares exigidos por la industria.
+            <p className="muted reveal">
+              Fundada en 1979. Nos dedicamos a la comercialización de instrumentos y servicios para la industria,
+              orientados a brindar soluciones a requerimientos técnicos de la industria moderna en el campo de
+              medición de temperatura y análisis de gases.
             </p>
           </div>
 
           <div className="two-col">
-            <div className="card">
-              <h3>Historia y propósito</h3>
+            <div className="card reveal reveal-up">
+              <h3>Objetivo</h3>
               <p className="muted">
-                Nacimos con el objetivo de acompañar a plantas y laboratorios en la medición de temperatura, un punto
-                crítico en seguridad, calidad y eficiencia energética. Con el tiempo ampliamos capacidades de ingeniería,
-                fabricación y soporte técnico, manteniendo una cultura de mejora continua.
+                Brindar y ofrecer soluciones a los diversos requerimientos técnicos que exige la industria moderna,
+                con asesoramiento técnico personalizado y foco en calidad.
               </p>
             </div>
-            <div className="card">
-              <h3>Reconocimiento</h3>
+            <div className="card reveal reveal-up">
+              <h3>Especialidades</h3>
               <p className="muted">
-                Trabajamos con organizaciones que requieren consistencia en materiales, trazabilidad de componentes y
-                control documental. Buscamos relaciones de largo plazo basadas en respuesta técnica y cumplimiento.
+                Gases, seguridad, incendio, detectores, calibración, instrumentación, control, temperatura,
+                laboratorio propio, servicio.
               </p>
             </div>
           </div>
@@ -33,38 +33,32 @@ export default function AboutPage() {
 
       <section className="section alt">
         <div className="container">
-          <h2>Certificaciones y cumplimiento</h2>
-          <p className="muted">
-            Adecuamos documentación, registros y criterios de fabricación a requerimientos del cliente y estándares
-            aplicables. A continuación se listan referencias típicas (según alcance de cada proyecto):
+          <h2 className="reveal">Marcas y servicios</h2>
+          <p className="muted reveal">
+            Distribuimos equipos y productos de primeras marcas a nivel global. Además, ofrecemos mantenimiento y
+            calibración en laboratorio propio.
           </p>
 
           <div className="cards three">
-            <div className="card">
-              <h3>Gestión de calidad</h3>
+            <div className="card reveal reveal-up">
+              <h3>Distribución</h3>
               <p className="muted">
-                Buenas prácticas de control, identificación, trazabilidad y registros para auditorías internas/externas.
+                Detectores de gases, data loggers, transmisores, sistemas de incendio y gases,
+                instrumentos de análisis de laboratorio.
               </p>
             </div>
-            <div className="card">
-              <h3>Trazabilidad metrológica</h3>
+            <div className="card reveal reveal-up">
+              <h3>Servicio</h3>
               <p className="muted">
-                Soporte para calibraciones/verificaciones y conservación de evidencia documental cuando aplica.
+                Asesoramiento técnico personalizado, mantenimiento y calibración.
               </p>
             </div>
-            <div className="card">
-              <h3>Seguridad de proceso</h3>
+            <div className="card reveal reveal-up">
+              <h3>Seguridad</h3>
               <p className="muted">
-                Selección de materiales, conexiones y protecciones acordes a condiciones de operación.
+                Sistemas de detección de incendio y gases y elementos de seguridad.
               </p>
             </div>
-          </div>
-
-          <div className="notice">
-            <p className="muted">
-              Si querés que incluyamos certificaciones específicas y alcance real (p. ej. ISO 9001, calibración acreditada,
-              etc.), decime cuáles poseen hoy y las incorporo con precisión.
-            </p>
           </div>
         </div>
       </section>

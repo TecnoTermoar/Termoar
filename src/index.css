@@ -2,6 +2,8 @@
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
+  --bg-soft: color-mix(in oklab, white 86%, var(--accent-2));
+  --surface: color-mix(in oklab, white 92%, var(--accent-2));
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
 
@@ -12,8 +14,17 @@
   --accent-bg: color-mix(in oklab, var(--accent) 14%, white);
   --accent-border: color-mix(in oklab, var(--accent) 55%, var(--border));
   --social-bg: color-mix(in oklab, var(--accent-2) 35%, white);
+  --ring: color-mix(in oklab, var(--accent) 45%, white);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-1: 140ms;
+  --dur-2: 220ms;
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --shadow-soft:
+    rgba(0, 0, 0, 0.08) 0 12px 30px -18px,
+    rgba(0, 0, 0, 0.06) 0 8px 16px -12px;
 
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -23,7 +34,16 @@
   letter-spacing: 0.18px;
   color-scheme: light;
   color: var(--text);
-  background: var(--bg);
+  background:
+    radial-gradient(1100px 760px at 10% -14%, color-mix(in oklab, var(--accent-2) 88%, white), transparent 54%),
+    radial-gradient(980px 660px at 96% -10%, color-mix(in oklab, var(--accent) 58%, white), transparent 56%),
+    radial-gradient(820px 560px at 55% 12%, color-mix(in oklab, var(--accent-3) 46%, white), transparent 62%),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--accent-2) 30%, white) 0%,
+      color-mix(in oklab, white 98%, var(--accent-2)) 50%,
+      color-mix(in oklab, var(--accent-2) 30%, white) 100%
+    );
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -38,6 +58,14 @@
 
 body {
   margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 #root {
@@ -87,6 +115,21 @@ code,
   font-family: var(--mono);
   display: inline-flex;
   border-radius: 4px;
+    /* reCAPTCHA v3/Enterprise badge: sólo visible en Contacto */
+  }
+
+  .grecaptcha-badge,
+  .rc-anchor-normal-footer {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  body.recaptcha-visible .grecaptcha-badge,
+  body.recaptcha-visible .rc-anchor-normal-footer {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   color: var(--text-h);
 }
 

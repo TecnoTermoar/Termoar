@@ -69,9 +69,15 @@ El frontend llama a `/api/contact`. En desarrollo, Vite proxya `/api/*` a `http:
 
 Duplicar `.env.example` a `.env` y completar:
 
-- `VITE_RECAPTCHA_SITE_KEY` (reCAPTCHA v3, frontend)
-- `RECAPTCHA_SECRET_KEY` (reCAPTCHA v3, backend)
+- `VITE_RECAPTCHA_SITE_KEY` (reCAPTCHA, frontend)
+- Enterprise (backend):
+	- `RECAPTCHA_ENTERPRISE_PROJECT_ID`
+	- `RECAPTCHA_ENTERPRISE_SITE_KEY`
+	- `GOOGLE_APPLICATION_CREDENTIALS` (path al JSON de service account)
 - SMTP: `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`
+
+Notas:
+- `.env` y el JSON de service account están ignorados por git (no se commitean).
 
 ## Producción (VPS)
 

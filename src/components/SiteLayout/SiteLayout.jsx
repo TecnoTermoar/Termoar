@@ -1,7 +1,8 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { useEffect, useId, useState } from 'react'
 
 const logoHeader = '/Logo-recortado-hd.png'
-const logoFooter = '/Logo-letras-hd.png'
+const logoFooter = '/Logo-recortado-hd.png'
 const whatsappIcon = '/WhatsApp.png'
 
 const navItems = [
@@ -13,6 +14,14 @@ const navItems = [
 ]
 
 function Header() {
+  const location = useLocation()
+  const menuId = useId()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [location.pathname])
+
   return (
     <header className="site-header" role="banner">
       <div className="container header-inner">
@@ -48,6 +57,50 @@ function Header() {
           </span>
           <span className="wa-text">WhatsApp</span>
         </a>
+
+        <button
+          type="button"
+          className={`menu-toggle${isMenuOpen ? ' is-open' : ''}`}
+          aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-controls={menuId}
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((v) => !v)}
+        >
+          <span className="menu-toggle-bars" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+        </button>
+      </div>
+
+      <div id={menuId} className={`mobile-menu${isMenuOpen ? ' is-open' : ''}`}>
+        <div className="container mobile-menu-inner">
+          <nav className="mobile-nav" aria-label="Navegación">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `mobile-nav-link${isActive ? ' is-active' : ''}`
+                }
+                end={item.to === '/'}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <a
+            className="btn primary mobile-cta"
+            href="https://wa.me/5491144063448"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img className="wa-inline-icon" src={whatsappIcon} alt="" />
+            WhatsApp
+          </a>
+        </div>
       </div>
     </header>
   )
@@ -70,9 +123,26 @@ function Footer() {
             <li>
               <a href="mailto:ventas@termoar.com.ar">ventas@termoar.com.ar</a>
             </li>
+            <li className="muted">Tel/Fax: +54 9 11 4773-1139</li>
             <li>
               <a href="https://wa.me/5491144063448" target="_blank" rel="noreferrer">
                 WhatsApp: +54 9 11 4406-3448
+              </a>
+            </li>
+            <li className="muted">
+              Gurruchaga 1177, Piso 4<br />
+              Capital Federal (C1414), Argentina
+            </li>
+            <li>
+              <a
+                className="social-link"
+                href="https://ar.linkedin.com/company/termometria-argentina-sa"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+              >
+                <img className="social-icon" src="/Linkedin.png" alt="" />
               </a>
             </li>
             <li className="muted">Argentina</li>

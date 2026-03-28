@@ -1,39 +1,33 @@
 const services = [
   {
     title: 'Ingeniería y selección',
-    description:
-      'Relevamiento del punto de medición, compatibilidad de materiales y definición del conjunto sensor + protección + conexión.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Fabricación y ensamble',
-    description:
-      'Ejecución de armados según planos y criterios de calidad. Identificación unívoca y documentación asociada.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Calibración / verificación',
-    description:
-      'Soporte para calibraciones y verificaciones según requerimiento de trazabilidad. Entrega de documentación y registros.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Mantenimiento y recambio',
-    description:
-      'Análisis de falla, recomendaciones de mejora y reemplazos planificados para minimizar paradas y riesgos de proceso.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Puesta en marcha',
-    description:
-      'Asistencia en la instalación, chequeos de señal y configuración de transmisores para una integración confiable.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
   {
     title: 'Capacitación',
-    description:
-      'Acompañamiento a mantenimiento y operación: buenas prácticas, criterios de selección y documentación mínima.',
+    description: 'Lorem ipsum dolor sit amet.',
   },
 ]
 
 function ServiceCard({ title, description }) {
   return (
-    <article className="card service-card">
+    <article className="card service-card reveal reveal-up">
       <div className="media" aria-hidden="true"></div>
       <div className="card-body">
         <h3>{title}</h3>
@@ -49,8 +43,8 @@ export default function ServicesPage() {
       <div className="container">
         <div className="page-head">
           <h1>Servicios</h1>
-          <p className="muted">
-            Servicios orientados a asegurar continuidad operativa, calidad metrológica y documentación para auditorías.
+          <p className="muted reveal">
+            Lorem ipsum dolor sit amet.
           </p>
         </div>
 
@@ -60,9 +54,9 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        <div className="notice">
+        <div className="notice reveal">
           <p className="muted">
-            Coordinamos visitas y relevamientos. Escribinos desde la página de Contacto o por WhatsApp.
+            Lorem ipsum dolor sit amet.
           </p>
         </div>
       </div>

@@ -44,6 +44,8 @@ export default function ContactPage() {
   const hasErrors = Object.keys(errors).length > 0
 
   useEffect(() => {
+    document.body.classList.add('recaptcha-visible')
+
     let cancelled = false
 
     // Precargar reCAPTCHA para que el script se inyecte antes del submit
@@ -56,18 +58,13 @@ export default function ContactPage() {
     })()
 
     return () => {
+      document.body.classList.remove('recaptcha-visible')
       cancelled = true
     }
   }, [])
 
   useEffect(() => {
-    return () => {
-      // cleanup any pending timers
-      if (window.__waWidgetTimer) {
-        clearTimeout(window.__waWidgetTimer)
-        window.__waWidgetTimer = null
-      }
-    }
+    return () => {}
   }, [])
 
   function onChange(e) {
@@ -162,40 +159,14 @@ export default function ContactPage() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
-  function waCancelTimer() {
-    if (window.__waWidgetTimer) {
-      clearTimeout(window.__waWidgetTimer)
-      window.__waWidgetTimer = null
-    }
-  }
-
-  function waScheduleClose(ms = 1600) {
-    waCancelTimer()
-    window.__waWidgetTimer = setTimeout(() => {
-      if (!waPinned) setWaOpen(false)
-    }, ms)
-  }
-
-  function onWaMouseEnter() {
-    setWaOpen(true)
-    waCancelTimer()
-  }
-
-  function onWaMouseLeave() {
-    if (waPinned) return
-    waScheduleClose(1600)
-  }
-
   function onWaInteract() {
     setWaOpen(true)
     setWaPinned(true)
-    waCancelTimer()
   }
 
   function onWaClose() {
     setWaPinned(false)
     setWaOpen(false)
-    waCancelTimer()
   }
 
   return (
@@ -203,14 +174,14 @@ export default function ContactPage() {
       <div className="container">
         <div className="page-head">
           <h1>Contacto</h1>
-          <p className="muted">
-            Para cotizaciones y consultas técnicas, completá el formulario o escribinos a{' '}
+          <p className="muted reveal">
+            Para cotizaciones y consultas técnicas, completá el <strong>formulario</strong> o escribinos a{' '}
             <a href="mailto:ventas@termoar.com.ar">ventas@termoar.com.ar</a>.
           </p>
         </div>
 
         <div className="two-col">
-          <div className="card">
+          <div className="card reveal reveal-right">
             <h3>Datos de contacto</h3>
             <ul className="plain-list">
               <li>
@@ -218,6 +189,10 @@ export default function ContactPage() {
                 <div>
                   <a href="mailto:ventas@termoar.com.ar">ventas@termoar.com.ar</a>
                 </div>
+              </li>
+              <li>
+                <span className="muted">Tel/Fax</span>
+                <div>+54 9 11 4773-1139</div>
               </li>
               <li>
                 <span className="muted">WhatsApp</span>
@@ -228,23 +203,47 @@ export default function ContactPage() {
                   </a>
                 </div>
               </li>
+              <li>
+                <span className="muted">Dirección</span>
+                <div>
+                  Gurruchaga 1177, Piso 4<br />
+                  Capital Federal (C1414), Argentina
+                </div>
+              </li>
+              <li>
+                <span className="muted">LinkedIn</span>
+                <div>
+                  <a
+                    href="https://ar.linkedin.com/company/termometria-argentina-sa"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img className="wa-inline-icon" src="/Linkedin.png" alt="" />
+                    termometria-argentina-sa
+                  </a>
+                </div>
+              </li>
             </ul>
 
             
           </div>
 
-          <form className="card form" onSubmit={onSubmit} noValidate aria-describedby={`${formId}-status`}>
+          <form className="card form reveal reveal-left" onSubmit={onSubmit} noValidate aria-describedby={`${formId}-status`}>
             <h3>Formulario</h3>
 
             <div
               className={`wa-widget${waOpen ? ' is-open' : ''}${waPinned ? ' is-pinned' : ''}`}
               aria-label="WhatsApp rápido"
-              onMouseEnter={onWaMouseEnter}
-              onMouseLeave={onWaMouseLeave}
             >
-              <div className="wa-widget-badge" aria-hidden="true">
+              <button
+                className="wa-widget-badge"
+                type="button"
+                onClick={onWaInteract}
+                aria-label="Abrir WhatsApp rápido"
+              >
                 <img className="wa-widget-icon" src="/WhatsApp.png" alt="" />
-              </div>
+                <span className="muted small">¿Preferís WhatsApp?</span>
+              </button>
 
               <div className="wa-widget-popover">
                 {waPinned ? (
@@ -261,7 +260,6 @@ export default function ContactPage() {
                       onWaInteract()
                       setWaMessage(e.target.value)
                     }}
-                    onClick={onWaInteract}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         onWhatsAppSend(e)
@@ -277,7 +275,7 @@ export default function ContactPage() {
                     Enviar
                   </button>
                 </div>
-                <p className="muted small">Se abre una nueva pestaña.</p>
+                <p className="muted small">Al enviar un mensaje, serás redirigido a WhatsApp</p>
               </div>
             </div>
 

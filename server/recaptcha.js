@@ -111,8 +111,20 @@ async function verifyRecaptchaEnterprise({ token, expectedAction, minScore, remo
   // Autenticación: OAuth2 con service account (Authorization: Bearer)
   const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${encodeURIComponent(projectId)}/assessments`
 
+  const creds = await loadServiceAccountCredentials()
+  if (!creds) {
+    return {
+      ok: false,
+      details: {
+        reason: 'missing_service_account',
+        hint: 'No se pudo cargar la Service Account. En Vercel no uses GOOGLE_APPLICATION_CREDENTIALS con un path local; usá GOOGLE_SERVICE_ACCOUNT_JSON_BASE64 (recomendado) o GOOGLE_SERVICE_ACCOUNT_JSON.',
+      },
+    }
+  }
+
   const accessToken = await getGoogleAccessToken({
     scope: 'https://www.googleapis.com/auth/cloud-platform',
+    creds,
   })
 
   if (!accessToken) {
@@ -188,9 +200,9 @@ async function verifyRecaptchaEnterprise({ token, expectedAction, minScore, remo
   }
 }
 
-async function getGoogleAccessToken({ scope }) {
-  const creds = await loadServiceAccountCredentials()
-  if (!creds) return ''
+async function getGoogleAccessToken({ scope, creds }) {
+  const resolvedCreds = creds || (await loadServiceAccountCredentials())
+  if (!resolvedCreds) return ''
 
   const now = Math.floor(Date.now() / 1000)
   const iat = now - 5
@@ -198,21 +210,21 @@ async function getGoogleAccessToken({ scope }) {
 
   const header = { alg: 'RS256', typ: 'JWT' }
   const payload = {
-    iss: creds.client_email,
+    iss: resolvedCreds.client_email,
     scope,
-    aud: creds.token_uri || 'https://oauth2.googleapis.com/token',
+    aud: resolvedCreds.token_uri || 'https://oauth2.googleapis.com/token',
     iat,
     exp,
   }
 
-  const signedJwt = await signJwtRs256({ header, payload, privateKeyPem: creds.private_key })
+  const signedJwt = await signJwtRs256({ header, payload, privateKeyPem: resolvedCreds.private_key })
 
   const body = new URLSearchParams({
     grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
     assertion: signedJwt,
   })
 
-  const res = await fetch(creds.token_uri || 'https://oauth2.googleapis.com/token', {
+  const res = await fetch(resolvedCreds.token_uri || 'https://oauth2.googleapis.com/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body,

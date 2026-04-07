@@ -5,35 +5,13 @@ export default function HomePage({ constructionMode = false }) {
     <>
       <section className="hero-section">
         <div className="container hero-grid">
-          <div className="reveal reveal-right">
+          <div className="hero-copy reveal reveal-right">
             <p className="eyebrow">TERMOMETRÍA • INDUSTRIA • CALIDAD</p>
             <h1>Termometría Argentina</h1>
             <p className="lead">
               Fundada en 1979. Especialistas en medición de temperatura y análisis de gases
               para la industria.
             </p>
-            <div className="cta-row">
-              {constructionMode ? (
-                <span className="btn primary is-disabled" aria-disabled="true">
-                  Ver productos
-                  <span className="nav-disabled-tag">En construcción</span>
-                </span>
-              ) : (
-                <NavLink className="btn primary" to="/productos">
-                  Ver productos
-                </NavLink>
-              )}
-              {constructionMode ? (
-                <span className="btn primary is-disabled" aria-disabled="true">
-                  Ver servicios
-                  <span className="nav-disabled-tag">En construcción</span>
-                </span>
-              ) : (
-                <NavLink className="btn primary" to="/servicios">
-                  Ver servicios
-                </NavLink>
-              )}
-            </div>
           </div>
 
           <div className="hero-card reveal reveal-left" aria-label="Resumen">
@@ -51,6 +29,29 @@ export default function HomePage({ constructionMode = false }) {
                 <p className="muted">Sitio en Construcción</p>
               </div>
             </div>
+          </div>
+
+          <div className="cta-row hero-cta">
+            {constructionMode ? (
+              <span className="btn primary is-disabled" aria-disabled="true">
+                Ver productos
+                <span className="nav-disabled-tag">En construcción</span>
+              </span>
+            ) : (
+              <NavLink className="btn primary" to="/productos">
+                Ver productos
+              </NavLink>
+            )}
+            {constructionMode ? (
+              <span className="btn primary is-disabled" aria-disabled="true">
+                Ver servicios
+                <span className="nav-disabled-tag">En construcción</span>
+              </span>
+            ) : (
+              <NavLink className="btn primary" to="/servicios">
+                Ver servicios
+              </NavLink>
+            )}
           </div>
         </div>
       </section>

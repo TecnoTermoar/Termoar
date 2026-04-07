@@ -10,6 +10,18 @@
   margin: 0 auto;
 }
 
+@media (max-width: 1100px) {
+  .container {
+    max-width: calc(100% - 32px);
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    max-width: calc(100% - 28px);
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(10px);
@@ -80,6 +92,7 @@
   display: flex;
   align-items: baseline;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 10px 0;
   text-align: center;
@@ -245,6 +258,29 @@
 
   .mobile-nav-link {
     padding: 12px 14px;
+  }
+
+  /* Mobile mode: make scroll cheaper */
+  .site-header {
+    backdrop-filter: none;
+  }
+
+  .mobile-menu {
+    backdrop-filter: none;
+  }
+
+  .reveal {
+    will-change: auto;
+  }
+}
+
+@media (hover: none) {
+  .nav-link:hover,
+  .mobile-nav-link:hover,
+  .wa-link:hover,
+  .btn:hover,
+  .menu-toggle:hover {
+    transform: none;
   }
 }
 
@@ -635,6 +671,26 @@ select {
   }
 }
 
+/* Intermediate desktop widths: prevent header from looking cramped/wrapping */
+@media (max-width: 1100px) {
+  .site-nav {
+    gap: 6px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    padding: 7px 8px;
+  }
+
+  .wa-link {
+    padding: 8px;
+  }
+
+  .wa-text {
+    display: none;
+  }
+}
+
 .site-main {
   flex: 1;
 }
@@ -651,13 +707,30 @@ select {
 
 .hero-grid {
   display: grid;
+  grid-template-areas: "copy card" "cta card";
   grid-template-columns: 1.1fr 0.9fr;
   gap: 22px;
   align-items: start;
 
   @media (max-width: 920px) {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "copy"
+      "card"
+      "cta";
   }
+}
+
+.hero-copy {
+  grid-area: copy;
+}
+
+.hero-cta {
+  grid-area: cta;
+}
+
+.hero-card {
+  grid-area: card;
 }
 
 .eyebrow {
@@ -705,6 +778,55 @@ select {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
+}
+
+@media (max-width: 920px) {
+  .hero-section {
+    padding: 48px 0;
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-copy h1 {
+    margin: 18px 0 10px;
+  }
+
+  .hero-copy .eyebrow {
+    display: none;
+  }
+
+  .hero-copy .lead {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 48ch;
+  }
+
+  .hero-card {
+    width: min(100%, 560px);
+    justify-self: center;
+    text-align: center;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 560px);
+    justify-self: center;
+    margin-top: 14px;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 18px;
+    border-radius: 16px;
+  }
 }
 
 .muted {

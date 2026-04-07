@@ -5,20 +5,24 @@ const logoHeader = '/Logo-recortado-hd.png'
 const logoFooter = '/Logo-recortado-hd.png'
 const whatsappIcon = '/WhatsApp.png'
 
-const navItems = [
-  { to: '/', label: 'Inicio' },
-  { to: '/productos', label: 'Productos' },
-  { to: '/servicios', label: 'Servicios' },
-  { to: '/nosotros', label: 'Nosotros' },
-  { to: '/contacto', label: 'Contacto' },
-]
+function getNavItems({ constructionMode }) {
+  return [
+    { to: '/', label: 'Inicio' },
+    { to: '/productos', label: 'Productos', disabled: Boolean(constructionMode) },
+    { to: '/servicios', label: 'Servicios', disabled: Boolean(constructionMode) },
+    { to: '/nosotros', label: 'Nosotros' },
+    { to: '/contacto', label: 'Contacto' },
+  ]
+}
 
-function Header() {
+function Header({ constructionMode }) {
   const location = useLocation()
   const menuId = useId()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const navItems = getNavItems({ constructionMode })
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMenuOpen(false)
   }, [location.pathname])
 
@@ -31,16 +35,21 @@ function Header() {
 
         <nav className="site-nav" aria-label="Navegación principal">
           {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) =>
-                `nav-link${isActive ? ' is-active' : ''}`
-              }
-              end={item.to === '/'}
-            >
-              {item.label}
-            </NavLink>
+            item.disabled ? (
+              <span key={item.to} className="nav-link is-disabled" aria-disabled="true">
+                {item.label}
+                <span className="nav-disabled-tag">En construcción</span>
+              </span>
+            ) : (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) => `nav-link${isActive ? ' is-active' : ''}`}
+                end={item.to === '/'}
+              >
+                {item.label}
+              </NavLink>
+            )
           ))}
         </nav>
 
@@ -78,16 +87,21 @@ function Header() {
         <div className="container mobile-menu-inner">
           <nav className="mobile-nav" aria-label="Navegación">
             {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  `mobile-nav-link${isActive ? ' is-active' : ''}`
-                }
-                end={item.to === '/'}
-              >
-                {item.label}
-              </NavLink>
+              item.disabled ? (
+                <span key={item.to} className="mobile-nav-link is-disabled" aria-disabled="true">
+                  {item.label}
+                  <span className="nav-disabled-tag">En construcción</span>
+                </span>
+              ) : (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) => `mobile-nav-link${isActive ? ' is-active' : ''}`}
+                  end={item.to === '/'}
+                >
+                  {item.label}
+                </NavLink>
+              )
             ))}
           </nav>
 
@@ -106,7 +120,8 @@ function Header() {
   )
 }
 
-function Footer() {
+function Footer({ constructionMode }) {
+  const navItems = getNavItems({ constructionMode })
   return (
     <footer className="site-footer" role="contentinfo">
       <div className="container footer-inner">
@@ -154,9 +169,15 @@ function Footer() {
           <ul className="footer-list">
             {navItems.map((item) => (
               <li key={item.to}>
-                <NavLink to={item.to} end={item.to === '/'}>
-                  {item.label}
-                </NavLink>
+                {item.disabled ? (
+                  <span className="footer-link is-disabled" aria-disabled="true">
+                    {item.label}
+                  </span>
+                ) : (
+                  <NavLink to={item.to} end={item.to === '/'}>
+                    {item.label}
+                  </NavLink>
+                )}
               </li>
             ))}
           </ul>
@@ -174,14 +195,22 @@ function Footer() {
   )
 }
 
-export default function SiteLayout() {
+export default function SiteLayout({ constructionMode = false }) {
   return (
     <div className="site-shell">
-      <Header />
+      <Header constructionMode={constructionMode} />
+      {constructionMode ? (
+        <div className="construction-banner" role="status" aria-live="polite">
+          <div className="container construction-banner-inner">
+            <strong>Sitio en construcción</strong>
+            <span className="muted">Por el momento, Productos y Servicios están inhabilitados.</span>
+          </div>
+        </div>
+      ) : null}
       <main className="site-main" role="main">
         <Outlet />
       </main>
-      <Footer />
+      <Footer constructionMode={constructionMode} />
     </div>
   )
 }

@@ -89,13 +89,16 @@ export async function verifyRecaptchaV3({ token, expectedAction, minScore, remot
 }
 
 async function verifyRecaptchaEnterprise({ token, expectedAction, minScore, remoteip, projectId }) {
-  const hasCreds = Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS) || Boolean(process.env.GOOGLE_SERVICE_ACCOUNT_JSON)
+  const hasCreds =
+    Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS) ||
+    Boolean(process.env.GOOGLE_SERVICE_ACCOUNT_JSON) ||
+    Boolean(process.env.GOOGLE_SERVICE_ACCOUNT_JSON_BASE64)
   if (!hasCreds) {
     return {
       ok: false,
       details: {
         reason: 'missing_service_account',
-        hint: 'Set GOOGLE_APPLICATION_CREDENTIALS to your service account JSON path (recommended) or set GOOGLE_SERVICE_ACCOUNT_JSON.',
+        hint: 'Set GOOGLE_SERVICE_ACCOUNT_JSON (or GOOGLE_SERVICE_ACCOUNT_JSON_BASE64 on Vercel) or GOOGLE_APPLICATION_CREDENTIALS (file path).',
       },
     }
   }
@@ -233,6 +236,16 @@ async function getGoogleAccessToken({ scope }) {
 }
 
 async function loadServiceAccountCredentials() {
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON_BASE64) {
+    try {
+      const raw = Buffer.from(String(process.env.GOOGLE_SERVICE_ACCOUNT_JSON_BASE64), 'base64').toString('utf8')
+      const parsed = JSON.parse(raw)
+      return parsed
+    } catch {
+      return null
+    }
+  }
+
   if (process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
     try {
       const parsed = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON)

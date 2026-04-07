@@ -46,8 +46,6 @@ export default function ContactPage() {
   useEffect(() => {
     document.body.classList.add('recaptcha-visible')
 
-    let cancelled = false
-
     // Precargar reCAPTCHA para que el script se inyecte antes del submit
     ;(async () => {
       try {
@@ -59,12 +57,7 @@ export default function ContactPage() {
 
     return () => {
       document.body.classList.remove('recaptcha-visible')
-      cancelled = true
     }
-  }, [])
-
-  useEffect(() => {
-    return () => {}
   }, [])
 
   function onChange(e) {
@@ -111,7 +104,7 @@ export default function ContactPage() {
           message:
             `No se pudo validar reCAPTCHA. ${
               recaptchaError?.message ? `Detalle: ${recaptchaError.message}. ` : ''
-            }Revisá que VITE_RECAPTCHA_SITE_KEY esté configurada, reiniciá \"npm run dev\" y recargá la página. También puede bloquearlo un AdBlock.`,
+            }Revisá que VITE_RECAPTCHA_SITE_KEY esté configurada, reiniciá "npm run dev" y recargá la página. También puede bloquearlo un AdBlock.`,
         })
         return
       }

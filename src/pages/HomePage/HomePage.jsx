@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 
-export default function HomePage() {
+export default function HomePage({ constructionMode = false }) {
   return (
     <>
       <section className="hero-section">
@@ -13,12 +13,26 @@ export default function HomePage() {
               para la industria.
             </p>
             <div className="cta-row">
-              <NavLink className="btn primary" to="/productos">
-                Ver productos
-              </NavLink>
-              <NavLink className="btn primary" to="/servicios">
-                Ver servicios
-              </NavLink>
+              {constructionMode ? (
+                <span className="btn primary is-disabled" aria-disabled="true">
+                  Ver productos
+                  <span className="nav-disabled-tag">En construcción</span>
+                </span>
+              ) : (
+                <NavLink className="btn primary" to="/productos">
+                  Ver productos
+                </NavLink>
+              )}
+              {constructionMode ? (
+                <span className="btn primary is-disabled" aria-disabled="true">
+                  Ver servicios
+                  <span className="nav-disabled-tag">En construcción</span>
+                </span>
+              ) : (
+                <NavLink className="btn primary" to="/servicios">
+                  Ver servicios
+                </NavLink>
+              )}
             </div>
           </div>
 
@@ -26,15 +40,15 @@ export default function HomePage() {
             <div className="stats">
               <div className="stat">
                 <p className="stat-kpi">Calidad</p>
-                <p className="muted">Lorem ipsum dolor sit amet.</p>
+                <p className="muted">Sitio en Construcción</p>
               </div>
               <div className="stat">
                 <p className="stat-kpi">Trazabilidad</p>
-                <p className="muted">Lorem ipsum dolor sit amet.</p>
+                <p className="muted">Sitio en Construcción</p>
               </div>
               <div className="stat">
                 <p className="stat-kpi">Soporte</p>
-                <p className="muted">Lorem ipsum dolor sit amet.</p>
+                <p className="muted">Sitio en Construcción</p>
               </div>
             </div>
           </div>
@@ -81,17 +95,17 @@ export default function HomePage() {
             <div className="step reveal reveal-up">
               <p className="step-n">1</p>
               <p className="step-t">Definimos el punto de medición</p>
-              <p className="muted">Lorem ipsum dolor sit amet.</p>
+              <p className="muted">Sitio en Construcción</p>
             </div>
             <div className="step reveal reveal-up">
               <p className="step-n">2</p>
               <p className="step-t">Seleccionamos el conjunto</p>
-              <p className="muted">Lorem ipsum dolor sit amet.</p>
+              <p className="muted">Sitio en Construcción</p>
             </div>
             <div className="step reveal reveal-up">
               <p className="step-n">3</p>
               <p className="step-t">Documentación y entrega</p>
-              <p className="muted">Lorem ipsum dolor sit amet.</p>
+              <p className="muted">Sitio en Construcción</p>
             </div>
           </div>
 
